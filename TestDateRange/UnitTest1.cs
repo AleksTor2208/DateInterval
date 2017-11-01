@@ -26,5 +26,15 @@ namespace TestDateRange
             var expected = "01.01-02.02.2017";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
         }
+
+        [TestMethod]
+        public void TestProperParametersWithSameYearAndMonthReturnProperValue()
+        {
+            var startDate = "01.02.2017";
+            var endDate = "02.02.2017";
+            var dateFormatter = new DateFormatter(startDate, endDate, new ValidationStatus());
+            var expected = "01-02.02.2017";
+            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
+        }
     }
 }
