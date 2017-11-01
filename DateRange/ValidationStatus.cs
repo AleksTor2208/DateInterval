@@ -38,19 +38,20 @@ namespace DateRange
 
         private bool IsProperDateFormat()
         {
+            var incorrectFormatStatus = "Incorrect date format, proper format is: dd.MM.yyyy";
             var concatData = startDate + endDate;
             concatData = concatData.Replace(".", "");
             for (int i = 0; i < concatData.Length; i++)
             {
-                if (!char.IsDigit(concatData[i]) || concatData[i] < 0)
+                if (!char.IsDigit(concatData[i]))
                 {
-                    StatusMessage = "Passing dates should be positive numbers";
+                    StatusMessage = incorrectFormatStatus;
                     return false;
                 }                    
             }
             if (!CheckDots(startDate) || !CheckDots(endDate))
             {
-                StatusMessage = "Passing dates should be positive numbers";
+                StatusMessage = incorrectFormatStatus;
                 return false;
             }
             return true;
