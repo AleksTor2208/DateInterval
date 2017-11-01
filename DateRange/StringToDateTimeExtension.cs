@@ -10,9 +10,14 @@ namespace DateRange
     {
         public static DateTime ConvertToDateTime(this string date)
         {
-            var year = int.Parse(date.Substring(6));
-            var month = int.Parse(date.Substring(3, 2));
-            var day = int.Parse(date.Substring(0, 2));
+            var yearIndex = 6;
+            var monthIndex = 3;
+            var dayIndex = 0;
+            var monthLength = 2;
+            var dayLength = 2;
+            var year = int.Parse(date.Substring(yearIndex));
+            var month = int.Parse(date.Substring(monthIndex, monthLength));
+            var day = int.Parse(date.Substring(dayIndex, dayLength));
             return new DateTime(year, month, day);
         }        
     }
