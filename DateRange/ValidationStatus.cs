@@ -20,20 +20,32 @@ namespace DateRange
 
         internal bool IsValid()
         {
-            return IsProperDateFormat() &&
-                IsCorrectDateOrder();
+            if (IsProperDateFormat())
+            {
+                if (IsCorrectDateOrder())
+                    return true;
+            }
+            return false;
         }
 
         private bool IsCorrectDateOrder()
         {
-            var firstDateYear = int.Parse(startDate.Substring(-4));
-            var secondDateYear = int.Parse(endDate.Substring(-4));
-            if (secondDateYear < firstDateYear)
+            var incorrectFormatStatus = "End date can not be less or same as first date";
+            var compareResult = DateTime.Compare(ConvertToDate(startDate), (ConvertToDate(endDate)));
+            if (compareResult >= 0)
             {
-                StatusMessage = "End date can not be less then first date";
+                StatusMessage = incorrectFormatStatus;
                 return false;
             }
             return true;
+        }
+
+        private DateTime ConvertToDate(string date)
+        {
+            var year = int.Parse(date.Substring(6));
+            var month = int.Parse(date.Substring(3, 2));
+            var day = int.Parse(date.Substring(0, 2));
+            return new DateTime(year, month, day);
         }
 
         private bool IsProperDateFormat()
