@@ -8,13 +8,13 @@ namespace TestDateRange
     public class UnitTest1
     {
         [TestMethod]
-        public void TestProperParametersWithDiffYearsPassedReturnProperValue()
+        public void TestProperParametersWithDiffYearsReturnProperValue()
         {
-            var startDate = "01.01.2001";
-            var endDate = "02.02.2002";
+            var startDate = "01.01.2016";
+            var endDate = "02.02.2017";
             var dateFormatter = new DateFormatter(startDate, endDate, new ValidationStatus());
-            var expected = "01.01.2001-02.02.2002";
+            var expected = "01.01.2016-02.02.2017";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
-        }
+        }      
     }
 }
