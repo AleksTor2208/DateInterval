@@ -31,22 +31,14 @@ namespace DateRange
         private bool IsCorrectDateOrder()
         {
             var incorrectFormatStatus = "End date can not be less or same as first date";
-            var compareResult = DateTime.Compare(ConvertToDate(startDate), (ConvertToDate(endDate)));
+            var compareResult = DateTime.Compare(startDate.ConvertToDateTime(), endDate.ConvertToDateTime());
             if (compareResult >= 0)
             {
                 StatusMessage = incorrectFormatStatus;
                 return false;
             }
             return true;
-        }
-
-        private DateTime ConvertToDate(string date)
-        {
-            var year = int.Parse(date.Substring(6));
-            var month = int.Parse(date.Substring(3, 2));
-            var day = int.Parse(date.Substring(0, 2));
-            return new DateTime(year, month, day);
-        }
+        }        
 
         private bool IsProperDateFormat()
         {
