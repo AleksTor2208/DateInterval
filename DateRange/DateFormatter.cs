@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DateRange
 {
     class DateFormatter
@@ -30,15 +25,17 @@ namespace DateRange
         {
             var convStartDate = startDate.ConvertToDateTime();
             var convEndDate = endDate.ConvertToDateTime();
+            var justDays = 2;
+            var justDaysAndMonth = 5;
             if (convStartDate.Year == convEndDate.Year)
             {
                 if (convStartDate.Month == convEndDate.Month)
                 {
-                    startDate = startDate.Substring(0, 2);
+                    startDate = startDate.Substring(0, justDays);
                 }
                 else
                 {
-                    startDate = startDate.Substring(0, 5);
+                    startDate = startDate.Substring(0, justDaysAndMonth);
                 }
             }
             return $"{startDate}-{endDate}";
