@@ -11,7 +11,7 @@ namespace DateRange
                 var startDate = args[0];
                 var endDate = args[1];
                 var dateFormatter = new DateFormatter(startDate, endDate, new ValidationStatus());
-                Console.WriteLine(dateFormatter.ValidateAndGetRange(startDate, endDate));
+                Console.WriteLine(dateFormatter.ValidateAndGetRange());
             }
             catch (IndexOutOfRangeException)
             {
