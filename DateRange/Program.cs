@@ -10,17 +10,24 @@ namespace DateRange
     {
         static void Main(string[] args)
         {
-            if (args.Length == 0)
-                Console.WriteLine("No arguments were passed");
-            Console.Read();
-            var startDate = args[0];
-            var endDate = args[1];
-            GetDateInterval(startDate, endDate);
+            try
+            {
+                var startDate = args[0];
+                var endDate = args[1];
+                var validationClass = new ValidationClass(startDate, endDate);
+                GetDateInterval(startDate, endDate);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                Console.WriteLine("No parameters have been passed.");
+            }                   
+            
         }
 
-        private static void GetDateInterval(string startDate, string endDate)
+        private static string GetDateInterval(string startDate, string endDate)
         {
-            throw new NotImplementedException();
+            return null;
+          
         }
     }
 }
