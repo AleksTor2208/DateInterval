@@ -1,0 +1,7 @@
+C:\Users\aleks\source\repos\DateRange\DateRange\bin\Debug\DateRange.exe.config
+C:\Users\aleks\source\repos\DateRange\DateRange\bin\Debug\DateRange.exe
+C:\Users\aleks\source\repos\DateRange\DateRange\bin\Debug\DateRange.pdb
+C:\Users\aleks\source\repos\DateRange\DateRange\obj\Debug\DateRange.csprojResolveAssemblyReference.cache
+C:\Users\aleks\source\repos\DateRange\DateRange\obj\Debug\DateRange.csproj.CoreCompileInputs.cache
+C:\Users\aleks\source\repos\DateRange\DateRange\obj\Debug\DateRange.exe
+C:\Users\aleks\source\repos\DateRange\DateRange\obj\Debug\DateRange.pdb
