@@ -13,19 +13,22 @@ namespace DateRange
             try
             {
                 var startDate = args[0];
-                var endDate = args[1];
-                var validationClass = new ValidationClass(startDate, endDate);
-                GetDateInterval(startDate, endDate);
+                var endDate = args[1];                
+                Console.WriteLine(GetDateInterval(startDate, endDate));
             }
             catch (IndexOutOfRangeException)
             {
                 Console.WriteLine("No parameters have been passed.");
-            }                   
+            }
+            Console.ReadLine();
             
         }
 
         private static string GetDateInterval(string startDate, string endDate)
         {
+            var validationStatus = new ValidationStatus(startDate, endDate);
+            if (validationStatus.IsValid())
+                return "IsValid";
             return null;
           
         }
