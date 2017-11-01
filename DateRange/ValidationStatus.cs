@@ -2,7 +2,7 @@
 
 namespace DateRange
 {
-    class ValidationStatus
+    public class ValidationStatus
     {       
         public string Message { get; set; }        
 
