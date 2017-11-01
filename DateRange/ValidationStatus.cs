@@ -38,7 +38,27 @@ namespace DateRange
 
         private bool IsProperDateFormat()
         {
-            throw new NotImplementedException();
+            var concatData = startDate + endDate;
+            concatData = concatData.Replace(".", "");
+            for (int i = 0; i < concatData.Length; i++)
+            {
+                if (!char.IsDigit(concatData[i]) || concatData[i] < 0)
+                {
+                    StatusMessage = "Passing dates should be positive numbers";
+                    return false;
+                }                    
+            }
+            if (!CheckDots(startDate) || !CheckDots(endDate))
+            {
+                StatusMessage = "Passing dates should be positive numbers";
+                return false;
+            }
+            return true;
+        }
+
+        private bool CheckDots(string date)
+        {
+            return date[2] == '.' && date[5] == '.';
         }
     }
 }
