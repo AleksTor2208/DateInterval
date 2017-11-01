@@ -58,6 +58,16 @@ namespace TestDateRange
         }
 
         [TestMethod]
+        public void TestProperErrorMefParametersHaveIncorrectFormat()
+        {
+            var startDate = "-1.02.2017";
+            var endDate = "02.-5.2017";
+            var dateFormatter = new DateFormatter(startDate, endDate, new ValidationStatus());
+            var expected = "Incorrect date format, proper format is: dd.MM.yyyy";
+            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
+        }
+
+        [TestMethod]
         public void TestProperErrorMessageSentIfParametersHaveIncorrectFormat()
         {
             var startDate = "02 Sep 2017";
@@ -77,6 +87,6 @@ namespace TestDateRange
             var dateFormatter = new DateFormatter(startDate, endDate, new ValidationStatus());
             var expected = "Incorrect date format, proper format is: dd.MM.yyyy";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
-        }
+        }       
     }
 }
