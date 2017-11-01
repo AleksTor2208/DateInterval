@@ -1,7 +1,7 @@
 ﻿
 namespace DateRange
 {
-    class DateFormatter
+    public class DateFormatter
     {
         private string startDate;
         private string endDate;
@@ -14,14 +14,14 @@ namespace DateRange
             this.validationStatus = validationStatus;
         }
 
-        public string ValidateAndGetRange(string startDate, string endDate)
+        public string ValidateAndGetRange()
         {            
             if (validationStatus.IsValid(startDate, endDate))
-                return GetProperFormatRange(startDate, endDate);
+                return GetProperFormatRange();
             return validationStatus.Message;
         }
 
-        private string GetProperFormatRange(string startDate, string endDate)
+        private string GetProperFormatRange()
         {
             var convStartDate = startDate.ConvertToDateTime();
             var convEndDate = endDate.ConvertToDateTime();
