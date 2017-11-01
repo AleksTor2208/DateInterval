@@ -1,46 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DateRange
 {
     class ValidationStatus
-    {
-        private string startDate;
-        private string endDate;
-        public string StatusMessage { get; set; }
+    {       
+        public string Message { get; set; }        
 
-        public ValidationStatus(string startDate, string endDate)
+        public bool IsValid(string startDate, string endDate)
         {
-            this.startDate = startDate;
-            this.endDate = endDate;
-        }
-
-        internal bool IsValid()
-        {
-            if (IsProperDateFormat())
+            if (IsProperDateFormat(startDate, endDate))
             {
-                if (IsCorrectDateOrder())
+                if (IsCorrectDateOrder(startDate, endDate))
                     return true;
             }
             return false;
         }
 
-        private bool IsCorrectDateOrder()
+        private bool IsCorrectDateOrder(string startDate, string endDate)
         {
             var incorrectFormatStatus = "End date can not be less or same as first date";
             var compareResult = DateTime.Compare(startDate.ConvertToDateTime(), endDate.ConvertToDateTime());
             if (compareResult >= 0)
             {
-                StatusMessage = incorrectFormatStatus;
+                Message = incorrectFormatStatus;
                 return false;
             }
             return true;
         }        
 
-        private bool IsProperDateFormat()
+        private bool IsProperDateFormat(string startDate, string endDate)
         {
             var incorrectFormatStatus = "Incorrect date format, proper format is: dd.MM.yyyy";
             var concatData = startDate + endDate;
@@ -49,13 +37,13 @@ namespace DateRange
             {
                 if (!char.IsDigit(concatData[i]))
                 {
-                    StatusMessage = incorrectFormatStatus;
+                    Message = incorrectFormatStatus;
                     return false;
                 }                    
             }
             if (!CheckDots(startDate) || !CheckDots(endDate))
             {
-                StatusMessage = incorrectFormatStatus;
+                Message = incorrectFormatStatus;
                 return false;
             }
             return true;
