@@ -56,5 +56,15 @@ namespace TestDateRange
             var expected = "End date can not be less or same as first date";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
         }
+
+        [TestMethod]
+        public void TestProperErrorMessageSentIfParametersHaveIncorrectFormat()
+        {
+            var startDate = "02 Sep 2017";
+            var endDate = "02 Nov 2017";
+            var dateFormatter = new DateFormatter(startDate, endDate, new ValidationStatus());
+            var expected = "Incorrect date format, proper format is: dd.MM.yyyy";
+            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
+        }
     }
 }
