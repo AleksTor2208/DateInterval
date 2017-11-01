@@ -66,5 +66,17 @@ namespace TestDateRange
             var expected = "Incorrect date format, proper format is: dd.MM.yyyy";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
         }
+
+        [TestMethod]
+        public void TestProperErrorMessageSentIfBigIntegerIsSentAsParameter()
+        {
+            var startDate = "118494549584938485783475838375993485748938574839485438904593485940" +
+                "34985490395489403945849037898789878987898789878799589430498590394859749384857389";
+            var endDate = "15438904593485940349854903954894039458490349589430498590394859035843" +
+                "42343488909890989098907968987898789878987879958943049859039485974938485738809890";
+            var dateFormatter = new DateFormatter(startDate, endDate, new ValidationStatus());
+            var expected = "Incorrect date format, proper format is: dd.MM.yyyy";
+            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
+        }
     }
 }
