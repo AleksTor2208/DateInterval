@@ -78,6 +78,16 @@ namespace TestDateRange
         }
 
         [TestMethod]
+        public void TestProperErrorMessageSentIfParameterDataHasIncorrectOrder()
+        {
+            const string startDate = "2016.09.10";
+            const string endDate = "2017.08.12";
+            var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
+            const string expected = "Incorrect date format, proper format is: dd.MM.yyyy";
+            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
+        }
+
+        [TestMethod]
         public void TestProperErrorMessageSentIfBigIntegerIsSentAsParameter()
         {
             const string startDate = "118494549584938485783475838375993485748938574839485438904593485940" +
