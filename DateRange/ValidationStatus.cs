@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace DateRange
 {
@@ -18,7 +19,7 @@ namespace DateRange
 
         private bool IsCorrectDateOrder(string startDate, string endDate)
         {
-            var incorrectFormatStatus = "End date can not be less or same as first date";
+            const string incorrectFormatStatus = "End date can not be less or same as first date";
             var compareResult = DateTime.Compare(startDate.ConvertToDateTime(), endDate.ConvertToDateTime());
             if (compareResult >= 0)
             {
@@ -30,28 +31,24 @@ namespace DateRange
 
         private bool IsProperDateFormat(string startDate, string endDate)
         {
-            var incorrectFormatStatus = "Incorrect date format, proper format is: dd.MM.yyyy";
+            const string incorrectFormatStatus = "Incorrect date format, proper format is: dd.MM.yyyy";
             var concatData = startDate + endDate;
             concatData = concatData.Replace(".", "");
-            for (int i = 0; i < concatData.Length; i++)
-            {
-                if (!char.IsDigit(concatData[i]))
-                {
-                    Message = incorrectFormatStatus;
-                    return false;
-                }                    
-            }
-            if (!CheckDots(startDate) || !CheckDots(endDate))
+            if (concatData.Any(t => !char.IsDigit(t)))
             {
                 Message = incorrectFormatStatus;
                 return false;
             }
-            return true;
+            if (CheckDots(startDate) && CheckDots(endDate)) return true;
+            Message = incorrectFormatStatus;
+            return false;
         }
 
         private bool CheckDots(string date)
         {
-            return date[2] == '.' && date[5] == '.';
+            const int dayMonthSeparator = 2;
+            const int monthYearSeparator = 5;
+            return date[dayMonthSeparator] == '.' && date[monthYearSeparator] == '.';
         }
     }
 }
