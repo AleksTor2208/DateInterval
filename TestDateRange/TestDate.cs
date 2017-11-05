@@ -1,5 +1,4 @@
-﻿using System;
-using DateRange;
+﻿using DateRange;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestDateRange
@@ -97,6 +96,16 @@ namespace TestDateRange
             var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
             const string expected = "Incorrect date format, proper format is: dd.MM.yyyy";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
-        }       
+        }
+
+        [TestMethod]
+        public void TestProperErrorMessageSentIfNullIsSentAsParameter()
+        {
+            const string startDate = null;
+            const string endDate = null;
+            var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
+            const string expected = "Arguments can't be 'null'";
+            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
+        }
     }
 }
