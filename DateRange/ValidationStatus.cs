@@ -44,7 +44,7 @@ namespace DateRange
             return false;
         }
 
-        private bool CheckDots(string date)
+        private static bool CheckDots(string date)
         {
             const int dayMonthSeparator = 2;
             const int monthYearSeparator = 5;
