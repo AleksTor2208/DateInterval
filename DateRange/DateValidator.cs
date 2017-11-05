@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DateRange
 {
-    public class ValidationStatus
+    public class DateValidator : IDateValidator
     {       
         public string Message { get; set; }        
 
