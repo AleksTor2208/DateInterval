@@ -3,42 +3,42 @@ namespace DateRange
 {
     public class DateFormatter
     {
-        private string startDate;
-        private string endDate;
-        private ValidationStatus validationStatus;
+        private string _startDate;
+        private string _endDate;
+        private readonly IDateValidator _dateValidator;
 
-        public DateFormatter(string startDate, string endDate, ValidationStatus validationStatus)
+        public DateFormatter(string startDate, string endDate, IDateValidator dateValidator)
         {
-            this.startDate = startDate;
-            this.endDate = endDate;
-            this.validationStatus = validationStatus;
+            this._startDate = startDate;
+            this._endDate = endDate;
+            this._dateValidator = dateValidator;
         }
 
         public string ValidateAndGetRange()
         {            
-            if (validationStatus.IsValid(startDate, endDate))
+            if (_dateValidator.IsValid(_startDate, _endDate))
                 return GetProperFormatRange();
-            return validationStatus.Message;
+            return _dateValidator.Message;
         }
 
         private string GetProperFormatRange()
         {
-            var convStartDate = startDate.ConvertToDateTime();
-            var convEndDate = endDate.ConvertToDateTime();
+            var convStartDate = _startDate.ConvertToDateTime();
+            var convEndDate = _endDate.ConvertToDateTime();
             var justDays = 2;
             var justDaysAndMonth = 5;
             if (convStartDate.Year == convEndDate.Year)
             {
                 if (convStartDate.Month == convEndDate.Month)
                 {
-                    startDate = startDate.Substring(0, justDays);
+                    _startDate = _startDate.Substring(0, justDays);
                 }
                 else
                 {
-                    startDate = startDate.Substring(0, justDaysAndMonth);
+                    _startDate = _startDate.Substring(0, justDaysAndMonth);
                 }
             }
-            return $"{startDate}-{endDate}";
+            return $"{_startDate}-{_endDate}";
         }
     }
 }
