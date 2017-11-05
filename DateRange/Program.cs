@@ -2,22 +2,15 @@
 
 namespace DateRange
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
-        {          
-            try
-            {
-                var startDate = args[0];
-                var endDate = args[1];
-                var dateFormatter = new DateFormatter(startDate, endDate, new ValidationStatus());
+        public static void Main(string[] args)
+        {            
+                var argsEncoder = new ArgsEncoder();
+                argsEncoder.EncodeArgs(args);
+                var dateFormatter = new DateFormatter(argsEncoder.StartDate, argsEncoder.EndDate, new DateValidator());
                 Console.WriteLine(dateFormatter.ValidateAndGetRange());
-            }
-            catch (IndexOutOfRangeException)
-            {
-                Console.WriteLine("No parameters have been passed.");
-            }
-            Console.ReadLine();            
+                Console.ReadLine();
         }        
     }
 }
