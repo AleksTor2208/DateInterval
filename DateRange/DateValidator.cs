@@ -9,12 +9,15 @@ namespace DateRange
 
         public bool IsValid(string startDate, string endDate)
         {
-            if (IsProperDateFormat(startDate, endDate))
-            {
-                if (IsCorrectDateOrder(startDate, endDate))
-                    return true;
-            }
-            return false;
+            return IsNotNull(startDate, endDate) && IsProperDateFormat(startDate, endDate) && IsCorrectDateOrder(startDate, endDate);
+        }
+
+        private bool IsNotNull(string startDate, string endDate)
+        {
+            const string incorrectFormatStatus = "Arguments can't be 'null'";
+            Message = incorrectFormatStatus;
+            return startDate != null && endDate != null;
+            
         }
 
         private bool IsCorrectDateOrder(string startDate, string endDate)
