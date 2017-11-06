@@ -45,7 +45,6 @@
     <Compile Include="ArgsEncoder.cs" />
     <Compile Include="DateFormatter.cs" />
     <Compile Include="IDateValidator.cs" />
-    <Compile Include="StringToDateTimeExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DateValidator.cs" />
