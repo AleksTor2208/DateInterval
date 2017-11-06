@@ -6,15 +6,18 @@ namespace TestDateRange
     [TestClass]
     public class TestDate
     {
-        [TestMethod]
-        public void TestReturnsCorrectValueWhenProperParamsWithDiffYearSent()
-        {
-            const string startDate = "01.01.2016";
-            const string endDate = "02.02.2017";
-            var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
-            const string expected = "01.01.2016-02.02.2017";
-            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
-        }
+
+
+        //[TestMethod]
+        //public void TestReturnsCorrectValueWhenProperParamsWithDiffYearSent()
+        //{
+        //    var year = randomYear();
+        //    const string startDate = getRandomDateWithYear(year); //"01.01.2016";
+        //    const string endDate = getRandomDateWithYear(year); //"02.02.2017";
+        //    var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
+        //    const string expected = "01.01.2016-02.02.2017";
+        //    Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
+        //}
 
         [TestMethod]
         public void TestReturnsCorrectValueWhenProperParamsWithSameYearSent()
@@ -39,21 +42,15 @@ namespace TestDateRange
         [TestMethod]
         public void TestReturnsErrorMessageWhenEndDateIsLessThenStartDate()
         {
+            //given
             const string startDate = "02.02.2017";
             const string endDate = "01.02.2017";
             var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
-            const string expected = "End date can not be less or same as first date";
-            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
-        }
-
-        [TestMethod]
-        public void TestErrorMessageIsSentIfEndDateIsSameAsStartDate()
-        {
-            const string startDate = "02.02.2017";
-            const string endDate = "02.02.2017";
-            var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
-            const string expected = "End date can not be less or same as first date";
-            Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
+            const string expected = "End date can not be less then first date";
+            //when
+            var actual = dateFormatter.ValidateAndGetRange();
+            //then
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -62,27 +59,29 @@ namespace TestDateRange
             const string startDate = "0-1.02.2017";
             const string endDate = "02.05.2017";
             var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
-            const string expected = "Incorrect date format, proper format is: dd.MM.yyyy";
+            string expected = $"{startDate}, {endDate} is not a valid date representation";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
         }
 
         [TestMethod]
-        public void TestProperErrorMessageSentIfParametersHaveIncorrectFormat()
+        public void TestProperValueIsReturnedWhenSpecificFormatWithSpacesIsPassed()
         {
-            const string startDate = "02 Sep 2017";
-            const string endDate = "02 Nov 2017";
+            const string startDate = "02 SEP 2017";
+            const string endDate = "03 SEP 2017";
             var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
-            const string expected = "Incorrect date format, proper format is: dd.MM.yyyy";
+            string expected = "02-03 SEP 2017";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
         }
+
+        
 
         [TestMethod]
         public void TestProperErrorMessageSentIfParameterDataHasIncorrectOrder()
         {
             const string startDate = "2016.09.10";
-            const string endDate = "2017.08.12";
+            const string endDate = "2015.08.12";
             var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
-            const string expected = "Incorrect date format, proper format is: dd.MM.yyyy";
+            string expected = "Inapropriate yyyy.MM.dd format. Try dd.MM.yyy";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
         }
 
@@ -94,18 +93,18 @@ namespace TestDateRange
             const string endDate = "15438904593485940349854903954894039458490349589430498590394859035843" +
                                    "42343488909890989098907968987898789878987879958943049859039485974938485738809890";
             var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
-            const string expected = "Incorrect date format, proper format is: dd.MM.yyyy";
+            string expected = $"{startDate}, {endDate} is not a valid date representation";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
         }
 
         [TestMethod]
-        public void TestProperErrorMessageSentIfNullIsSentAsParameter()
+        public void TestProperErrorMessageSentIfParameterDataIsNull()
         {
             const string startDate = null;
             const string endDate = null;
             var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
-            const string expected = "Arguments can't be 'null'";
+            string expected = $"{startDate}, {endDate} is not a valid date representation";
             Assert.AreEqual(expected, dateFormatter.ValidateAndGetRange());
         }
-    }
+    }       
 }
