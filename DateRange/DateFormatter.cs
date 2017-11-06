@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace DateRange
 {
     public class DateFormatter
@@ -18,27 +20,38 @@ namespace DateRange
         {            
             if (_dateValidator.IsValid(_startDate, _endDate))
                 return GetProperFormatRange();
-            return _dateValidator.Message;
+            return _dateValidator.ErrorMessage;
         }
 
         private string GetProperFormatRange()
         {
-            var convStartDate = _startDate.ConvertToDateTime();
-            var convEndDate = _endDate.ConvertToDateTime();
-            var justDays = 2;
-            var justDaysAndMonth = 5;
-            if (convStartDate.Year == convEndDate.Year)
+            var convStartDate = DateTime.Parse(_startDate);
+            var convEndDate = DateTime.Parse(_endDate);                                 
+                if (convStartDate.Year == convEndDate.Year)                
+                    return FormatDateWithSameYear(convStartDate, convEndDate);                             
+            return $"{_startDate}-{_endDate}";                     
+        }
+
+        private string FormatDateWithSameYear(DateTime convStartDate, DateTime convEndDate)
+        {
+            if (convStartDate.Month != convEndDate.Month)
             {
-                if (convStartDate.Month == convEndDate.Month)
-                {
-                    _startDate = _startDate.Substring(0, justDays);
-                }
-                else
-                {
-                    _startDate = _startDate.Substring(0, justDaysAndMonth);
-                }
+                const int DaysMonthIndex = 5;
+                _startDate = _startDate.Substring(0, DaysMonthIndex);
+                return $"{_startDate}-{_endDate}";
             }
-            return $"{_startDate}-{_endDate}";
+            return FormatDateWithSameMonth(convStartDate, convEndDate);
+        }
+
+        private string FormatDateWithSameMonth(DateTime convStartDate, DateTime convEndDate)
+        {
+            if (convStartDate.Day != convEndDate.Day)
+            {
+                const int daysIndex = 2;
+                _startDate = _startDate.Substring(0, daysIndex);
+                return $"{_startDate}-{_endDate}";                
+            }
+            return convStartDate.ToShortDateString();              
         }
     }
 }
