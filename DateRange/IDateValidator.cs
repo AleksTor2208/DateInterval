@@ -8,7 +8,7 @@ namespace DateRange
 {
     public interface IDateValidator
     {
-        string Message { get; set; }
+        string ErrorMessage { get; set; }
         bool IsValid(string startDate, string endDate);
        
     }
