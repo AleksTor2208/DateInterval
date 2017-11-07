@@ -33,8 +33,7 @@ namespace DateRange
         private bool IsConvertable(string startDate, string endDate)
         {
             ErrorDetails = $"{startDate}, {endDate} is not a valid date representation";
-            DateTime date;
-            var hasConverted = DateTime.TryParse(startDate, out date)
+            var hasConverted = DateTime.TryParse(startDate, out DateTime date)
                 && DateTime.TryParse(endDate, out date);
             if (hasConverted) return true;
             ErrorMessage = ErrorDetails;
