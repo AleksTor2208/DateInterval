@@ -46,7 +46,7 @@ namespace DateRange
             var convStartDate = DateTime.Parse(startDate);
             var convEtartDate = DateTime.Parse(endDate);
             var compareResult = DateTime.Compare(convStartDate, convEtartDate);
-            if (compareResult < 0) return true;
+            if (compareResult <= 0) return true;
             ErrorMessage = ErrorDetails;
             return false;                   
         }          
