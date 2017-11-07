@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace DateRange
 {
@@ -17,6 +18,8 @@ namespace DateRange
             catch (IndexOutOfRangeException)
             {
                 Console.WriteLine("Two arguments should be given.");
+                Thread.Sleep(3000);
+                Environment.Exit(0);
             }
         }
     }
