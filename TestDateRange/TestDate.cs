@@ -63,6 +63,20 @@ namespace TestDateRange
         }
 
         [TestMethod]
+        public void TestReturnsProperValueWithSameDateParameters()
+        {
+            //given
+            const string startDate = "02.02.2017";
+            const string endDate = "02.02.2017";
+            var dateFormatter = new DateFormatter(startDate, endDate, new DateValidator());
+            const string expected = "02.02.2017";
+            //when
+            var actual = dateFormatter.ValidateAndGetRange();
+            //then
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestProperErrorMessageIsSentIfParamsIncludeNegativeNumber()
         {
             //given
